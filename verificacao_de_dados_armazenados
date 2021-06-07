@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+    struct tp_endereco{
+        int numero, cep;
+    };
+
+    struct tp_dados{
+        int data,mes,ano;
+        char cpf[12], rg [12], email[30], sexo1[10], sexo2[10], nome[50];
+        int numero_celular;
+    };
+
+    typedef struct{
+        int ra, curso;
+        double nota_geral;
+        char nome_curso [50];
+
+        struct tp_endereco end;
+        struct tp_dados dad;
+
+    } cad[2];
+
+int main ()
+{
+    cad a1;
+    cad *ptrcad = &a1;
+
+    FILE*ptrArq;
+    ptrArq = fopen ("C:\\Users\\Guilherme\\Desktop\\exercicio geral casavella\\cadastro_aluno\\cadastro.bin","rb");
+
+    printf("\n-------------------------------------------Dados gravados no banco de dados-------------------------------------------\n");
+
+    fread(&a1[0], sizeof(cad),1, ptrArq);
+
+    for (int i=0;i<2;i++){
+         printf("Nome: %s\n CPF: %s\nCEP: %d\nCurso: %d\n ", a1[i].dad.nome, a1[i].dad.cpf, a1[i].end.cep, a1[i].curso);
+    }
+
+    fclose (ptrArq);
+    system("pause");
+
+    return 0;
+}
